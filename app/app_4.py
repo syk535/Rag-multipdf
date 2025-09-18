@@ -398,7 +398,8 @@ class ChunkEditor(tk.Toplevel):
     def __init__(self, parent, chunks, on_done):
         super().__init__(parent)
         self.title("Review & Modify Chunks")
-        self.geometry("1000x600")
+        self.geometry("1200x750")
+        self.minsize(900, 600)
         self.parent = parent
         self.on_done = on_done
 
@@ -448,8 +449,13 @@ class ChunkEditor(tk.Toplevel):
         # Bottom buttons
         bottom = ttk.Frame(right)
         bottom.pack(fill="x", padx=8, pady=8)
-        ttk.Button(bottom, text="Save edits", command=self._save_edits).pack(side="left")
-        ttk.Button(bottom, text="Done (build index)", command=self._done).pack(side="right")
+
+        save_button = ttk.Button(bottom, text="Save edits", command=self._save_edits)
+        save_button.pack(side="left", fill="x", expand=True, padx=(0, 4))
+
+        done_button = ttk.Button(bottom, text="Done (build index)", command=self._done)
+        done_button.pack(side="left", fill="x", expand=True, padx=(4, 0))
+
 
         # Modal-ish
         self.transient(parent)
